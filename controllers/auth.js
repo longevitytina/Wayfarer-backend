@@ -5,14 +5,12 @@ const bcrypt = require("bcrypt");
 const register = (req, res) => {
   // validation of the POSTed data (make sure the user has a name, email, and pw)
   if (
-    !req.body.name ||
     !req.body.email ||
-    !req.body.password ||
-    !req.body.city
+    !req.body.password
   ) {
     return res.status(400).json({
       status: 400,
-      message: "Please enter a name, city, email, and password",
+      message: "Please enter an email and password",
     });
   }
 
@@ -49,9 +47,7 @@ const register = (req, res) => {
           });
 
         const newUser = {
-          name: req.body.name,
           email: req.body.email,
-          city: req.body.city,
           password: hash,
         };
 
@@ -59,7 +55,7 @@ const register = (req, res) => {
           if (err) return res.status(500).json({ status: 500, message: err });
           return res
             .status(200)
-            .json({ status: 200, message: `${savedUser.name} registered!` });
+            .json(savedUser._id);
         });
       });
     });

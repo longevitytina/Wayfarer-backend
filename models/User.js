@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Name is required"],
   },
   email: {
     type: String,
@@ -13,10 +12,8 @@ const UserSchema = mongoose.Schema({
     unique: true,
   },
   city: {
-    type: String,
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: "City",
-    // required: [true, "City is required"],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "City"
   },
   password: {
     type: String,

@@ -17,8 +17,6 @@ const bcrypt = require("bcrypt");
 //   });
 // }
 
-
-
 const users = [
   {
     name: "Bob",
@@ -167,7 +165,6 @@ const cities = [
   },
 ];
 
-
 db.City.deleteMany({}, (err, dCities) => {
   if (err) return console.error(err);
   console.log(`Deleted ${dCities.deletedCount} cities.`);
@@ -177,40 +174,40 @@ db.City.deleteMany({}, (err, dCities) => {
     //   if (err) return console.error(err);
     //   console.log(`Deleted ${dUsers.deletedCount} users.`);
     //   db.User.create(users, (err, newUsers) => {
-        // for (let user of newUsers) {
-        //   console.log(user.password);
-        //   bcrypt.hash(user.password, 10, async (err, hash) => {
-        //     console.log(hash);
-        //     user.password = hash;
-        //     user.save();
-        //   })
-        //   await user.save();
-        // }
-        db.Post.deleteMany({}, (err, dPosts) => {
-          // console.log(newUsers);
-          if (err) return console.error(err);
-          console.log(`Deleted ${dPosts.deletedCount} posts.`);
-          db.Post.create(posts, async (err, newPosts) => {
-            // console.log(newUsers);
-            for (let n=0; n<cities.length; n++) {
-              newPosts[n*2].city = newCities[n]._id;
-              newPosts[n*2].author = "5ea34aa59b13ca3c180fcfde";
-              newPosts[n*2].save();
-              newPosts[n*2+1].city = newCities[n]._id;
-              newPosts[n*2+1].author = "5ea34aa59b13ca3c180fcfde";
-              newPosts[n*2+1].save();
-              // newUsers[n].save();
-            }
-            console.log(`Created ${newCities.length} cities, 0 users, ${newPosts.length} posts.`);
-            // console.log(newUsers);
-            
-          })
-        })
-      // })
+    // for (let user of newUsers) {
+    //   console.log(user.password);
+    //   bcrypt.hash(user.password, 10, async (err, hash) => {
+    //     console.log(hash);
+    //     user.password = hash;
+    //     user.save();
+    //   })
+    //   await user.save();
+    // }
+    db.Post.deleteMany({}, (err, dPosts) => {
+      // console.log(newUsers);
+      if (err) return console.error(err);
+      console.log(`Deleted ${dPosts.deletedCount} posts.`);
+      db.Post.create(posts, async (err, newPosts) => {
+        // console.log(newUsers);
+        for (let n = 0; n < cities.length; n++) {
+          newPosts[n * 2].city = newCities[n]._id;
+          newPosts[n * 2].author = "5ea34aa59b13ca3c180fcfde";
+          newPosts[n * 2].save();
+          newPosts[n * 2 + 1].city = newCities[n]._id;
+          newPosts[n * 2 + 1].author = "5ea257bb85264b285e0934b4";
+          newPosts[n * 2 + 1].save();
+          // newUsers[n].save();
+        }
+        console.log(
+          `Created ${newCities.length} cities, 0 users, ${newPosts.length} posts.`
+        );
+        // console.log(newUsers);
+      });
+    });
+    // })
     // })
   });
-})
-
+});
 
 // db.Problem.deleteMany({})
 //   .then((_result) => db.Solution.deleteMany())
@@ -236,4 +233,3 @@ db.City.deleteMany({}, (err, dCities) => {
 // 2. run node seed in terminal to clear & seed database
 
 // 3. Ctrl + c in terminal to exit node shell once database is seeded
-

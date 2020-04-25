@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   title: String,
-  body: String,
+  body: Array,
   image: String,
   author: {
     type: mongoose.Schema.Types.ObjectId,

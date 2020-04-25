@@ -13,4 +13,7 @@ router.get("/:id", ctrl.usersCtrl.show);
 // update user's profile using their ID
 router.put("/:id", ctrl.usersCtrl.update);
 
+// remove user's profile by ID
+router.delete("/:id", ctrl.usersCtrl.remove);
+
 module.exports = router;

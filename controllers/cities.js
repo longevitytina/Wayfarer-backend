@@ -39,5 +39,5 @@ const create = (req, res) => {
 module.exports = {
   index,
   show,
-  create
+  create,
 };

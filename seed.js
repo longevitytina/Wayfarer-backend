@@ -231,10 +231,10 @@ db.City.deleteMany({}, (err, dCities) => {
         // console.log(newUsers);
         for (let n = 0; n < cities.length; n++) {
           newPosts[n * 2].city = newCities[n]._id;
-          newPosts[n * 2].author = "5ea34aa59b13ca3c180fcfde";
+          newPosts[n * 2].author = "5ea257bb85264b285e0934b4";
           newPosts[n * 2].save();
           newPosts[n * 2 + 1].city = newCities[n]._id;
-          newPosts[n * 2 + 1].author = "5ea34aa59b13ca3c180fcfde";
+          newPosts[n * 2 + 1].author = "5ea257bb85264b285e0934b4";
           newPosts[n * 2 + 1].save();
           // newUsers[n].save();
         }

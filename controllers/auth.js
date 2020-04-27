@@ -4,10 +4,7 @@ const bcrypt = require("bcrypt");
 // POST - create new user (register)
 const register = (req, res) => {
   // validation of the POSTed data (make sure the user has a name, email, and pw)
-  if (
-    !req.body.email ||
-    !req.body.password
-  ) {
+  if ( !req.body.email || !req.body.password ) {
     return res.status(400).json({
       status: 400,
       message: "Please enter an email and password",
@@ -53,6 +50,8 @@ const register = (req, res) => {
 
         db.User.create(newUser, (err, savedUser) => {
           if (err) return res.status(500).json({ status: 500, message: err });
+          // req.session.currentUser = { id: savedUser._id };
+          console.log(req.session.currentUser);
           return res
             .status(200)
             .json(savedUser._id);

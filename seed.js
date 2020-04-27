@@ -198,8 +198,8 @@ const cities = [
       "https://images.unsplash.com/photo-1519863528809-9a44cbc3f1f4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=600",
   },
   {
-    name: "Singapore",
-    country: "Singapore",
+    name: "Gibraltar",
+    country: "UK",
     image:
       "https://images.unsplash.com/photo-1577743401035-5cd175264d9f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=600",
   },
@@ -231,7 +231,7 @@ db.City.deleteMany({}, (err, dCities) => {
         // console.log(newUsers);
         for (let n = 0; n < cities.length; n++) {
           newPosts[n * 2].city = newCities[n]._id;
-          newPosts[n * 2].author = "5ea257bb85264b285e0934b4";
+          newPosts[n * 2].author = "5ea34aa59b13ca3c180fcfde";
           newPosts[n * 2].save();
           newPosts[n * 2 + 1].city = newCities[n]._id;
           newPosts[n * 2 + 1].author = "5ea257bb85264b285e0934b4";

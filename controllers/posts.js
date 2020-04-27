@@ -160,44 +160,50 @@ const db = require("../models");
 // or all posts e.g. /api/v1/posts
 const get = (req, res) => {
   if (req.query.author) {
-    db.Post.find({author: req.query.author}, (err, posts) => {
-      if(err) {
-        return res.status(400).json({
-          status: 400,
-          error: 'Something went wrong, please try again.'
-        });
-      }
-      res.json(posts);
-    });
+    db.Post.find({ author: req.query.author })
+      .sort("-updatedAt")
+      .exec((err, posts) => {
+        if (err) {
+          return res.status(400).json({
+            status: 400,
+            error: "Something went wrong, please try again.",
+          });
+        }
+        res.json(posts);
+      });
   } else if (req.query.city) {
-    db.Post.find({city: req.query.city}, (err, posts) => {
-      if(err) {
-        return res.status(400).json({
-          status: 400,
-          error: 'Something went wrong, please try again.'
-        });
-      }
-      res.json(posts);
-    });
+    db.Post.find({ city: req.query.city })
+      .sort("-updatedAt")
+      .exec((err, posts) => {
+        if (err) {
+          return res.status(400).json({
+            status: 400,
+            error: "Something went wrong, please try again.",
+          });
+        }
+        res.json(posts);
+      });
   } else {
-    db.Post.find({}, (err, posts) => {
-      if(err) {
-        return res.status(400).json({
-          status: 400,
-          error: 'Something went wrong, please try again.'
-        });
-      }
-      res.json(posts);
-    });
+    db.Post.find({})
+      .sort("-updatedAt")
+      .exec((err, posts) => {
+        if (err) {
+          return res.status(400).json({
+            status: 400,
+            error: "Something went wrong, please try again.",
+          });
+        }
+        res.json(posts);
+      });
   }
-}
+};
 
 const create = (req, res) => {
   db.Post.create(req.body, (err, newPost) => {
-    if(err) {
+    if (err) {
       return res.status(400).json({
         status: 400,
-        error: 'Something went wrong, please try again.'
+        error: "Something went wrong, please try again.",
       });
     }
     res.status(201).json(newPost);
@@ -205,51 +211,47 @@ const create = (req, res) => {
 };
 
 const show = (req, res) => {
-  db.Post
-    .findById(req.params.id)
-    .populate('author')
-    .populate('city')
+  db.Post.findById(req.params.id)
+    .populate("author")
+    .populate("city")
     .exec((err, foundPost) => {
       if (err) {
         return res.status(400).json({
           status: 400,
-          error: 'Something went wrong, please try again.'
+          error: "Something went wrong, please try again.",
         });
       }
       res.json(foundPost);
-    })
-}
+    });
+};
 
 const update = (req, res) => {
   db.Post.findOneAndUpdate(
-    {_id: req.params.id},
+    { _id: req.params.id },
     req.body,
-    {new: true}, // returns updated document
+    { new: true }, // returns updated document
     (err, updatedPost) => {
       if (err) {
         return res.status(400).json({
           status: 400,
-          error: 'Something went wrong, please try again.'
+          error: "Something went wrong, please try again.",
         });
       }
       res.json(updatedPost);
     }
-  )
-}
+  );
+};
 
 const remove = (req, res) => {
-  db.Post.deleteOne(
-    {_id: req.params.id},
-    (err, deletedPost) => {
-      if (err) {
-        return res.status(400).json({
-          status: 400,
-          error: 'Something went wrong, please try again.'
-        });
-      }
-      res.json(deletedPost);
+  db.Post.deleteOne({ _id: req.params.id }, (err, deletedPost) => {
+    if (err) {
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, please try again.",
+      });
     }
-  )
+    res.json(deletedPost);
+  });
 };
 
 module.exports = {

@@ -13,7 +13,10 @@ const routes = require("./routes");
 
 // Handle Cors
 const corsOptions = {
-  origin: [`http://localhost:3000`],
+  origin: [
+    `http://localhost:3000`,
+    "https://sheltered-thicket-24218.herokuapp.com/",
+  ],
   credentials: true, // allows the session cookie to be sent back and forth from server to client
   optionsSuccessStatus: 200, // some legacy browsers choke on status 204
 };
@@ -31,7 +34,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     // Store the session in our DB
-    store: new MongoStore({ url: process.env.MONGO_URI }),
+    store: new MongoStore({ url: process.env.MONGODB_URI }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     debug: true,

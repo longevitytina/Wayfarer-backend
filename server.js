@@ -14,7 +14,7 @@ const routes = require("./routes");
 // Handle Cors
 const corsOptions = {
   origin: [
-    `http://localhost:3000`,
+    // `http://localhost:3000`,
     "https://sheltered-thicket-24218.herokuapp.com",
   ],
   credentials: true, // allows the session cookie to be sent back and forth from server to client

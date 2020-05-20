@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 const dbUrl = process.env.MONGODB_URI;
 
-// connect to the DB
 mongoose
   .connect(dbUrl, {
     useNewUrlParser: true,
@@ -12,7 +12,6 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(`MongoDB connection error: ${err}`));
 
-// TODO: export the User
 module.exports = {
   User: require("./User"),
   City: require("./City"),

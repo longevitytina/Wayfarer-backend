@@ -5,16 +5,14 @@ const MongoStore = require("connect-mongo")(session);
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
+const routes = require("./routes");
 require("dotenv").config();
 
-const routes = require("./routes");
+/* ------------------------------- Handle Cors ------------------------------ */
 
-// Middleware ----------------------------- //
-
-// Handle Cors
 const corsOptions = {
   origin: [
-    // `http://localhost:3000`,
+    "http://localhost:3000",
     "https://sheltered-thicket-24218.herokuapp.com",
   ],
   credentials: true, // allows the session cookie to be sent back and forth from server to client
@@ -23,14 +21,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Logging with Morgan
+/* --------------------------- Logging with Morgan -------------------------- */
+
 app.use(morgan("tiny"));
 
-// BodyParser
+/* ------------------------------- BodyParser ------------------------------- */
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Express Session - Authentication
+/* -------------------- Express Session - Authentication -------------------- */
+
 app.use(
   session({
     // Store the session in our DB
@@ -44,7 +45,10 @@ app.use(
     },
   })
 );
-// Routes --------------------------------- //
+
+/* -------------------------------------------------------------------------- */
+/*                                   Routes                                   */
+/* -------------------------------------------------------------------------- */
 
 app.get("/", (req, res) => {
   res.send("<h1>Wayfarer</h1>");
@@ -55,7 +59,9 @@ app.use("/api/v1/auth", routes.auth);
 app.use("/api/v1/cities", routes.cities);
 app.use("/api/v1/posts", routes.posts);
 
-// Server --------------------------------- //
+/* -------------------------------------------------------------------------- */
+/*                                   Server                                   */
+/* -------------------------------------------------------------------------- */
 
 app.listen(process.env.PORT || 3001);
 // () => {

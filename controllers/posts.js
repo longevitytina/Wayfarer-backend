@@ -46,7 +46,7 @@ const get = (req, res) => {
 const create = (req, res) => {
   db.Post.create(req.body, (err, newPost) => {
     if (err) {
-      if (err.name == 'ValidationError') {
+      if (err.name == "ValidationError") {
         return res.status(422).json(err);
       }
       return res.status(400).json({

@@ -50,7 +50,7 @@ const register = (req, res) => {
 
         db.User.create(newUser, (err, savedUser) => {
           if (err) return res.status(500).json({ status: 500, message: err });
-          // req.session.currentUser = { id: savedUser._id };
+          req.session.currentUser = { id: savedUser._id };
           console.log(req.session.currentUser);
           return res
             .status(200)
